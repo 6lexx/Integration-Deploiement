@@ -142,16 +142,81 @@ Deleted: sha256:<LAYER_HASH>
 ```
 
 ---
+# Serveur Nginx
 
-## Récapitulatif des commandes
+---
 
-| Commande | Rôle |
-|---|---|
-| `docker --version` | Affiche la version de Docker installée |
-| `docker images` | Liste les images présentes en local |
-| `docker pull <image>` | Télécharge une image depuis Docker Hub |
-| `docker run <image>` | Crée et lance un conteneur à partir d'une image |
-| `docker ps` | Liste les conteneurs en cours d'exécution |
-| `docker ps -a` | Liste tous les conteneurs, y compris arrêtés |
-| `docker rm <id>` | Supprime un conteneur |
-| `docker rmi <id>` | Supprime une image |
+## 1. Télécharger l'image `nginx`
+
+```powershell
+PS C:\Users\matth> docker pull nginx
+```
+
+```text
+Using default tag: latest
+latest: Pulling from library/nginx
+<LAYER_ID>: Pull complete
+<LAYER_ID>: Pull complete
+<LAYER_ID>: Pull complete
+<LAYER_ID>: Pull complete
+<LAYER_ID>: Pull complete
+<LAYER_ID>: Pull complete
+<LAYER_ID>: Pull complete
+Digest: sha256:<DIGEST>
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview nginx
+```
+
+---
+
+## 2. Lancer un conteneur Nginx en arrière-plan
+
+```powershell
+PS C:\Users\matth> docker run -d -p 8080:80 --name mon_nginx nginx
+```
+
+```text
+<CONTAINER_ID>
+```
+
+---
+
+## 3. Vérifier que le conteneur tourne
+
+```powershell
+PS C:\Users\matth> docker ps
+```
+
+```text
+CONTAINER ID     IMAGE     COMMAND                  CREATED         STATUS         PORTS                  NAMES
+<CONTAINER_ID>   nginx     "/docker-entrypoint.…"   2 minutes ago   Up 2 minutes   0.0.0.0:8080->80/tcp   mon_nginx
+```
+
+---
+
+## 4. Arrêter le conteneur
+
+```powershell
+PS C:\Users\matth> docker stop mon_nginx
+```
+
+```text
+mon_nginx
+```
+
+---
+
+## 5. Supprimer le conteneur
+
+```powershell
+PS C:\Users\matth> docker rm mon_nginx
+```
+
+```text
+mon_nginx
+```
+
+---
