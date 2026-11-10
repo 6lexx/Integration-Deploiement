@@ -31,3 +31,16 @@ RUN npm run build
 
 USER root
 - le conteneur tourne en root, cela pose un problème de sécurité
+
+## Analyse du code
+package.json
+- la dépendance mongodb n'est jamais utilisé : elle alourdit l'image pour rien
+
+server.js
+- existsSync et readFileSync sont synchrones et bloquent tout le serveur pendant la lecture. Le fichier entier est chargé en mémoire
+
+server.js middleware
+- il y a un log sur chaque requête, même en production
+
+server.js
+- il n'y a pas de gestion du SIGTERM mise en place: docker stop attend 10 secondes avant de tuer le processus
