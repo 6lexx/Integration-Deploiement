@@ -34,7 +34,7 @@ def hello():
     return "Hello World"
 
 if __name__ == "__main__":
-    app.run(app.run(host="0.0.0.0", port=8080)
+    app.run(app.run(host="0.0.0.0", port=5173)
 ```
 
 
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 python app.py
 ```
 
-L'application est accessible sur <http://127.0.0.1:5000>.
+L'application est accessible sur <http://127.0.0.1:5173>.
 
 ### 4. Dépendances – `requirements.txt`
 
@@ -103,7 +103,7 @@ docker images
 ### 8. Lancement du conteneur
 
 ```powershell
-docker run -d -p 5000:5000 --name mon_flask mon-app-flask
+docker run -d -p 5173:5173 --name mon_flask mon-app-flask
 ```
 
 Vérification :
@@ -114,7 +114,7 @@ docker ps
 
 ### 9. Test dans le navigateur
 
-Ouvrir <http://localhost:5000> : la page affiche **Hello World**.
+Ouvrir <http://localhost:5173> : la page affiche **Hello World**.
 
 En cas de problème :
 
@@ -135,4 +135,35 @@ docker rm mon_flask
 git add app.py requirements.txt Dockerfile .dockerignore .gitignore README.md
 git commit -m "Application Flask conteneurisée avec Docker"
 git push -u origin appPythonFlask
+```
+
+
+### 12. Fusion dans la branche `main`
+
+Une fois validé, la branche `appPythonFlask` est fusionnée dans `main`.
+
+**Mettre la branche de travail à jour et la pousser :**
+
+```powershell
+git pull --rebase
+git push
+```
+
+**Se placer sur `main` et la mettre à jour :**
+
+```powershell
+git checkout main
+git pull
+```
+
+**Fusionner la branche de travail :**
+
+```powershell
+git merge appPythonFlask
+```
+
+**Pousser `main` :**
+
+```powershell
+git push
 ```
