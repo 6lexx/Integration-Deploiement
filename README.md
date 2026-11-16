@@ -33,14 +33,27 @@ USER root
 - le conteneur tourne en root, cela pose un problème de sécurité
 
 ## Analyse du code
-package.json
-- la dépendance mongodb n'est jamais utilisé : elle alourdit l'image pour rien
 
-server.js
-- existsSync et readFileSync sont synchrones et bloquent tout le serveur pendant la lecture. Le fichier entier est chargé en mémoire
+"mongodb" dans package.json
+- la dépendance n'est jamais utilisée dans server.js : elle ajoute environ 9 Mo et 11 paquets à l'image pour rien
 
-server.js middleware
-- il y a un log sur chaque requête, même en production
+"nodemon" dans devDependencies
+- il n'est utilisé dans aucun script, et npm install l'installe quand même dans l'image alors que le conteneur démarre avec node
 
-server.js
-- il n'y a pas de gestion du SIGTERM mise en place: docker stop attend 10 secondes avant de tuer le processus
+"build" dans package.json
+- le script ne fait qu'un echo, il ne compile et ne génère rien
+
+app.use(console.log...)
+- il y a un log sur chaque requête, même en production. console.log est synchrone et ralentit le serveur sous charge
+
+fs.existsSync + fs.readFileSync sur /big
+- les deux appels sont synchrones et bloquent tout le serveur pendant la lecture. Le fichier entier est chargé en mémoire, puis copié une deuxième fois par le replace
+
+res.send('Fichier introuvable')
+- le fichier maybe-big-file.txt n'existe pas dans le projet, la route répond toujours "Fichier introuvable" mais avec un code 200 au lieu d'un 404
+
+app.listen sans gestion du SIGTERM
+- dans le conteneur, node tourne en PID 1 et ignore le SIGTERM : docker stop attend 10 secondes avant de tuer le processus, et les requêtes en cours sont coupées
+
+En-tête X-Powered-By
+- Express envoie "X-Powered-By: Express" par défaut, ce qui indique la technologie utilisée à un éventuel attaquant
