@@ -1,0 +1,21 @@
+﻿IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+bbd542b5cfdb   3 minutes ago   CMD ["node" "server.js"]                        0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   USER root                                       0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   RUN /bin/sh -c npm run build # buildkit         3.55kB    buildkit.dockerfile.v0
+<missing>      3 minutes ago   ENV NODE_ENV=development                        0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   EXPOSE map[3000/tcp:{} 4000/tcp:{} 5000/tcp:ÔÇª   0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   RUN /bin/sh -c apt-get update && apt-get insÔÇª   48.5MB    buildkit.dockerfile.v0
+<missing>      3 minutes ago   RUN /bin/sh -c npm install # buildkit           3.02MB    buildkit.dockerfile.v0
+<missing>      3 minutes ago   COPY . /app # buildkit                          10.9MB    buildkit.dockerfile.v0
+<missing>      4 minutes ago   COPY node_modules ./node_modules # buildkit     10.8MB    buildkit.dockerfile.v0
+<missing>      4 minutes ago   WORKDIR /app                                    0B        buildkit.dockerfile.v0
+<missing>      4 days ago      CMD ["node"]                                    0B        buildkit.dockerfile.v0
+<missing>      4 days ago      ENTRYPOINT ["docker-entrypoint.sh"]             0B        buildkit.dockerfile.v0
+<missing>      4 days ago      COPY docker-entrypoint.sh /usr/local/bin/ # ÔÇª   388B      buildkit.dockerfile.v0
+<missing>      4 days ago      RUN /bin/sh -c ARCH= && dpkgArch="$(dpkg --pÔÇª   224MB     buildkit.dockerfile.v0
+<missing>      4 days ago      ENV NODE_VERSION=26.13.1                        0B        buildkit.dockerfile.v0
+<missing>      4 days ago      RUN /bin/sh -c groupadd --gid 1000 node   &&ÔÇª   8.94kB    buildkit.dockerfile.v0
+<missing>      11 days ago     RUN /bin/sh -c set -ex;  apt-get update;  apÔÇª   658MB     buildkit.dockerfile.v0
+<missing>      11 days ago     RUN /bin/sh -c set -eux;  apt-get update;  aÔÇª   185MB     buildkit.dockerfile.v0
+<missing>      11 days ago     RUN /bin/sh -c set -eux;  apt-get update;  aÔÇª   60.2MB    buildkit.dockerfile.v0
+<missing>      11 days ago     # debian.sh --arch 'amd64' out/ 'trixie' '@1ÔÇª   120MB     debuerreotype 0.17
